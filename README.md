@@ -6,10 +6,17 @@ Medium-fidelity prototype design for an AI-powered job application builder with 
 
 - Node.js 16+ ([Download](https://nodejs.org/))
 - Docker (optional) ([Download](https://www.docker.com/))
+- Git ([Download](https://git-scm.com/))
 
 ## Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/june1963/ModularApply-Prototype.git
+
+# Navigate to project directory
+cd ModularApply-Prototype
+
 # Install dependencies
 npm install
 
