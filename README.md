@@ -1,6 +1,6 @@
 # ModularApply
 
-Medium-fidelity prototype design for an AI-powered job application builder with modular profile management.
+High-fidelity prototype design for an AI-powered job application builder with modular profile management.
 
 ## Prerequisites
 
