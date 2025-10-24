@@ -1,6 +1,6 @@
 # ModularApply
 
-Medium-Fidelity AI-powered job application builder with modular profile management.
+Medium-fidelity prototype design for an AI-powered job application builder with modular profile management.
 
 ## Prerequisites
 

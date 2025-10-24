@@ -1,4 +1,4 @@
-import { ProfileBlock, AISuggestion, Job, Application } from '../types';
+import { ProfileBlock, AISuggestion, Job, Application } from './types';
 
 export const userProfile = {
   name: 'Alex Chen',
