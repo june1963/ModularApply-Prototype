@@ -30,7 +30,10 @@ export function ProfileBlocks({ profileBlocks, setProfileBlocks, onAddAuditEvent
   const [blocks, setBlocks] = useState<ProfileBlock[]>(profileBlocks);
   const [selectedCategory, setSelectedCategory] = useState('Work');
   const [selectedBlock, setSelectedBlock] = useState<ProfileBlock | null>(blocks[0]);
-  const [suggestions, setSuggestions] = useState<AISuggestion[]>(aiSuggestions);
+  // Filter to only show general suggestions (those without a jobId)
+  const [suggestions, setSuggestions] = useState<AISuggestion[]>(
+    aiSuggestions.filter(s => !s.jobId)
+  );
   const [editedContent, setEditedContent] = useState(selectedBlock?.content || '');
   const [editedTitle, setEditedTitle] = useState(selectedBlock?.title || '');
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);

@@ -40,6 +40,7 @@ export interface AISuggestion {
   blockId?: string;
   field?: string;
   suggestedValue?: string;
+  jobId?: string; // If set, suggestion is specific to this job. If undefined, it's a general suggestion
 }
 
 export interface UserProfile {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { aiSuggestions } from '../../data/mockData';
 import { Job, AISuggestion, ProfileBlock } from '../../types';
 import { AISuggestionCard } from '../AISuggestionCard';
@@ -80,7 +80,15 @@ export function ApplicationBuilder({
     );
   }
   
-  const [suggestions, setSuggestions] = useState<AISuggestion[]>(aiSuggestions.slice(0, 3));
+  // Filter suggestions to only show those for the selected job
+  const [suggestions, setSuggestions] = useState<AISuggestion[]>(
+    aiSuggestions.filter(s => s.jobId === selectedJob.id)
+  );
+  
+  // Update suggestions when job selection changes
+  useEffect(() => {
+    setSuggestions(aiSuggestions.filter(s => s.jobId === selectedJobId));
+  }, [selectedJobId]);
   const [showJobReasoning, setShowJobReasoning] = useState(false);
   const [showAssemblyReasoning, setShowAssemblyReasoning] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
