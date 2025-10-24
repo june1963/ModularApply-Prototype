@@ -17,6 +17,13 @@ export function Privacy({ auditTrail, onAddAuditEvent }: PrivacyProps) {
   const handleToggle = (setting: string, newValue: boolean, onChange: (value: boolean) => void) => {
     onChange(newValue);
     const status = newValue ? 'enabled' : 'disabled';
+    
+    // Log to audit trail
+    onAddAuditEvent(
+      'Privacy setting changed',
+      `${setting} ${status}`
+    );
+    
     toast.success(`${setting} ${status}`, {
       duration: 2000,
     });

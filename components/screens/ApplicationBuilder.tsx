@@ -89,6 +89,16 @@ export function ApplicationBuilder({
   useEffect(() => {
     setSuggestions(aiSuggestions.filter(s => s.jobId === selectedJobId));
   }, [selectedJobId]);
+
+  // Sync selectedBlocks with updated profileBlocks when they change
+  useEffect(() => {
+    setSelectedBlocks(currentSelectedBlocks =>
+      currentSelectedBlocks.map(selectedBlock => {
+        const updatedBlock = profileBlocks.find(b => b.id === selectedBlock.id);
+        return updatedBlock || selectedBlock;
+      })
+    );
+  }, [profileBlocks]);
   const [showJobReasoning, setShowJobReasoning] = useState(false);
   const [showAssemblyReasoning, setShowAssemblyReasoning] = useState(false);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
