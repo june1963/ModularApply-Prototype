@@ -55,11 +55,27 @@ export function ProfileBlocks({ profileBlocks, setProfileBlocks, onAddAuditEvent
     }
   }, [profileBlocks]); // selectedBlock.id is captured in selectedId
 
+  // Update selected block when category changes
+  useEffect(() => {
+    const blocksInCategory = blocks.filter(b => b.category === selectedCategory);
+    if (blocksInCategory.length > 0) {
+      const firstBlock = blocksInCategory[0];
+      setSelectedBlock(firstBlock);
+      setEditedContent(firstBlock.content);
+      setEditedTitle(firstBlock.title);
+    } else {
+      setSelectedBlock(null);
+      setEditedContent('');
+      setEditedTitle('');
+    }
+  }, [selectedCategory, blocks]);
+
   const handleAccept = (id: string) => {
     const suggestion = suggestions.find(s => s.id === id);
     if (!suggestion) return;
 
     let updatedBlockTitle = '';
+    let updatedBlock: ProfileBlock | null = null;
 
     if (suggestion.blockId && suggestion.suggestedValue) {
       const block = blocks.find(b => b.id === suggestion.blockId);
@@ -72,11 +88,13 @@ export function ProfileBlocks({ profileBlocks, setProfileBlocks, onAddAuditEvent
         setBlocks(updatedBlocks);
         setProfileBlocks(updatedBlocks);
         
-        // Update selected block if it's the one being modified
-        if (selectedBlock?.id === suggestion.blockId) {
-          setSelectedBlock({ ...block, content: suggestion.suggestedValue! });
-          setEditedContent(suggestion.suggestedValue!);
-        }
+        updatedBlock = { ...block, content: suggestion.suggestedValue!, preview: block.title };
+        
+        // Switch to the category and select the updated block
+        setSelectedCategory(block.category);
+        setSelectedBlock(updatedBlock);
+        setEditedContent(suggestion.suggestedValue!);
+        setEditedTitle(block.title);
         
         // Track updated blocks with visual indicator
         setRecentlyUpdatedBlockIds(prev => [...prev, suggestion.blockId!]);

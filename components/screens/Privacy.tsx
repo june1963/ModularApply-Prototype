@@ -50,22 +50,29 @@ export function Privacy({ auditTrail, onAddAuditEvent }: PrivacyProps) {
           <div className="space-y-4">
             <div>
               <p className="text-sm text-purple-100 mb-2">Storage Location</p>
-              <div className="bg-white/10 rounded-lg p-3 flex items-center gap-2">
+              <div className={`rounded-lg p-3 flex items-center gap-2 ${
+                localStorage ? 'bg-white/10' : 'bg-red-500/30'
+              }`}>
                 <Database className="w-5 h-5" />
-                <span>100% Local</span>
+                <span>{localStorage ? '100% Local' : 'Not Saved'}</span>
               </div>
             </div>
             
             <div>
               <p className="text-sm text-purple-100 mb-2">Encryption</p>
-              <div className="bg-white/10 rounded-lg p-3 flex items-center gap-2">
+              <div className={`rounded-lg p-3 flex items-center gap-2 ${
+                localStorage ? 'bg-white/10' : 'bg-white/5'
+              }`}>
                 <Shield className="w-5 h-5" />
-                <span>AES-256</span>
+                <span>{localStorage ? 'AES-256' : 'N/A'}</span>
               </div>
             </div>
 
             <div className="text-sm text-purple-100 mt-4">
-              Your profile data never leaves your device unless you explicitly submit an application.
+              {localStorage 
+                ? 'Your profile data never leaves your device unless you explicitly submit an application.'
+                : '⚠️ Data will be lost when you close this tab. Enable Local Storage to save your profile.'
+              }
             </div>
           </div>
         </div>
